@@ -12,6 +12,14 @@ public class Account {
         pockets = new ArrayList<>();
     }
 
+    public String acctName(){
+        return name;
+    }
+
+    public List<Pocket> pocketListName() {
+        return pockets;
+    }
+
     public double getAccountBalance(){
         return balance;
     }
@@ -47,6 +55,5 @@ public class Account {
         return "Pocket not found.";
 
     }
-
 
     }

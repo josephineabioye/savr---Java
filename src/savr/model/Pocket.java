@@ -5,10 +5,10 @@ public class Pocket {
     private double targetAmount;
     private double currentAmount;
 
-    public Pocket(String name, double tAmount, double cAmount){
+    public Pocket(String name, double tAmount){
         this.name = name;
         targetAmount = tAmount;
-        currentAmount = cAmount;
+        currentAmount = 0;
     }
 
     public String getPocketName(){
