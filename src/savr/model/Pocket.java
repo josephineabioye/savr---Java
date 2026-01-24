@@ -37,7 +37,7 @@ public class Pocket {
         if(currentAmount == targetAmount){
             return "Amount Credited!!";
         }
-        return "mount Credited Successfully!!";
+        return "Amount Credited Successfully!!";
     }
 
     public boolean isGoalReached(){

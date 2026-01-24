@@ -12,6 +12,10 @@ public class Account {
         pockets = new ArrayList<>();
     }
 
+    public double getAccountBalance(){
+        return balance;
+    }
+
     public void deposit(double amount) {
         balance = balance + amount;
     }
@@ -36,11 +40,7 @@ public class Account {
         for (Pocket temp : pockets) {
             if (temp.getPocketName().equalsIgnoreCase(pocketName)) {
                 String result = temp.addFunds(amount);
-
-                // Only deduct if pocket actually accepted the money
-                if (result.startsWith("Amount credited")) {
                     balance -= amount;
-                }
                 return result;
             }
         }
