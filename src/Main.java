@@ -48,7 +48,7 @@ public class Main {
             }
             if (choice == 3) {
                 System.out.println("Enter pocket name: ");
-                String pocketName = reader.nextLine();
+                String pocketName = reader.nextLine().trim();
                 System.out.println("Enter target amount: ");
                 double target = reader.nextDouble();
                 reader.nextLine();
@@ -58,7 +58,7 @@ public class Main {
             }
             if (choice == 4) {
                 System.out.println("Enter pocket name to transfer to: ");
-                String pocketName = reader.nextLine();
+                String pocketName = reader.nextLine().trim();
                 System.out.println("Enter amount to transfer: ");
                 double amount = reader.nextDouble();
                 reader.nextLine();
@@ -76,7 +76,9 @@ public class Main {
                 System.out.println("Exiting...");
                 running = false;
             }
-            System.out.println("Invalid choice. Try again!");
+            else {
+                System.out.println("Invalid choice. Try again!");
+            }
         }
 
 
