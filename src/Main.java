@@ -2,6 +2,7 @@ package savr;
 
 import savr.model.Account;
 import savr.model.Pocket;
+import savr.model.Transaction;
 
 import java.util.Scanner;
 
@@ -27,7 +28,8 @@ public class Main {
             System.out.println("3. Add a new pocket");
             System.out.println("4. Transfer to pocket");
             System.out.println("5. Show balances");
-            System.out.println("6. Exit");
+            System.out.println("6. View Transaction History");
+            System.out.println("7. Exit");
             System.out.println("Enter your choice");
             int choice = reader.nextInt();
             reader.nextLine();
@@ -73,6 +75,11 @@ public class Main {
                 }
             }
             if (choice == 6) {
+                for (Transaction temp : account1.getTransactions()) {
+                    System.out.println(temp);
+                }
+            }
+            if (choice == 7) {
                 System.out.println("Exiting...");
                 running = false;
             }
