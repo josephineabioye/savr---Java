@@ -5,11 +5,13 @@ public class Account {
     private String name;
     private double balance;
     private List<Pocket> pockets;
+    private List<Transaction> transactions;
 
     public Account(String name, double bal) {
         this.name = name;
         balance = bal;
         pockets = new ArrayList<>();
+        transactions = new ArrayList<>();
     }
 
     public String acctName(){
@@ -26,10 +28,12 @@ public class Account {
 
     public void deposit(double amount) {
         balance = balance + amount;
+        transactions.add(new Transaction("DEPOSIT", amount, "Deposit to account"));
     }
 
     public void withdraw(double amount) {
         balance = balance - amount;
+        transactions.add(new Transaction("WITHDRAW", amount, "Withdrawal from account"));
     }
 
     public void addPocket(Pocket pocket) {
@@ -49,11 +53,16 @@ public class Account {
             if (temp.getPocketName().equalsIgnoreCase(pocketName)) {
                 String result = temp.addFunds(amount);
                     balance -= amount;
+                    transactions.add(new Transaction("POCKET_TRANSFER",
+                            amount, "Transfer to pocket: " + pocketName));
                 return result;
             }
         }
         return "Pocket not found.";
 
+    }
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
     }
