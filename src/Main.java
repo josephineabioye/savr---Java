@@ -41,14 +41,14 @@ public class Main {
                 account1.deposit(amount);
                 System.out.println("Deposited: " + amount);
             }
-            if (choice == 2) {
+            else if (choice == 2) {
                 System.out.println("Enter withdrawal amount: ");
                 double amount = reader.nextDouble();
                 reader.nextLine();
                 account1.withdraw(amount);
                 System.out.println("withdrawn: " + amount);
             }
-            if (choice == 3) {
+            else if (choice == 3) {
                 System.out.println("Enter pocket name: ");
                 String pocketName = reader.nextLine().trim();
                 System.out.println("Enter target amount: ");
@@ -58,7 +58,7 @@ public class Main {
                 account1.addPocket(pocket1);
                 System.out.println("Pocket " + pocket1 + "created with target " + target);
             }
-            if (choice == 4) {
+            else if (choice == 4) {
                 System.out.println("Enter pocket name to transfer to: ");
                 String pocketName = reader.nextLine().trim();
                 System.out.println("Enter amount to transfer: ");
@@ -67,19 +67,19 @@ public class Main {
                 String result = account1.transferToPocket(pocketName, amount);
                 System.out.println(result);
             }
-            if (choice == 5) {
+            else if (choice == 5) {
                 System.out.println("Account balance: " + account1.getAccountBalance());
                 System.out.println("Pockets:");
                 for (Pocket p : account1.pocketListName()) {
                     System.out.println(" - " + p.getPocketName() + ": " + p.getPocketBalance() + " / " + p.getTargetAmount());
                 }
             }
-            if (choice == 6) {
+            else if (choice == 6) {
                 for (Transaction temp : account1.getTransactions()) {
                     System.out.println(temp);
                 }
             }
-            if (choice == 7) {
+            else if (choice == 7) {
                 System.out.println("Exiting...");
                 running = false;
             }
