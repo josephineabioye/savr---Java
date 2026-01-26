@@ -1,6 +1,7 @@
 package savr;
 
 import savr.model.Account;
+import savr.model.AutoDebit;
 import savr.model.Pocket;
 import savr.model.Transaction;
 
@@ -29,7 +30,10 @@ public class Main {
             System.out.println("4. Transfer to pocket");
             System.out.println("5. Show balances");
             System.out.println("6. View Transaction History");
-            System.out.println("7. Exit");
+            System.out.println("7. Create Auto-debit");
+            System.out.println("8. Run All Auto-Debits");
+            System.out.println("9. Run One Auto-Debit");
+            System.out.println("10. Exit");
             System.out.println("Enter your choice");
             int choice = reader.nextInt();
             reader.nextLine();
@@ -78,8 +82,32 @@ public class Main {
                 for (Transaction temp : account1.getTransactions()) {
                     System.out.println(temp);
                 }
+
             }
             else if (choice == 7) {
+                System.out.print("Enter pocket name: ");
+                String pocketName = reader.nextLine().trim();
+
+                System.out.print("Enter amount: ");
+                double amount = reader.nextDouble();
+                reader.nextLine();
+
+                AutoDebit rule = new AutoDebit(pocketName, amount);
+                account1.addAutoDebit(rule);
+
+                System.out.println("Auto-debit created successfully.");
+            }
+            else if (choice == 8) {
+                account1.runAutoDebits();
+            }
+            else if (choice == 9) {
+                System.out.print("Enter pocket name for auto-debit: ");
+                String pocketName = reader.nextLine().trim();
+
+                String result = account1.runSingleAutoDebit(pocketName);
+                System.out.println(result);
+            }
+            else if (choice == 10) {
                 System.out.println("Exiting...");
                 running = false;
             }
