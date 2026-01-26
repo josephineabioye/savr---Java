@@ -6,12 +6,14 @@ public class Account {
     private double balance;
     private List<Pocket> pockets;
     private List<Transaction> transactions;
+    private List<AutoDebit> autoDebits;
 
     public Account(String name, double bal) {
         this.name = name;
         balance = bal;
         pockets = new ArrayList<>();
         transactions = new ArrayList<>();
+        autoDebits = new ArrayList<>();
     }
 
     public String acctName(){
@@ -65,4 +67,46 @@ public class Account {
         return transactions;
     }
 
+    public void addAutoDebit(AutoDebit rule) {
+       autoDebits.add(rule);
+    }
+
+    public void runAutoDebits() {
+        for (AutoDebit rule : autoDebits) {
+
+            double amount = rule.autoDebitAmount();
+            String pocketName = rule.autoDebitPocketName();
+
+            if (balance >= amount) {
+                String result = transferToPocket(pocketName, amount);
+
+                if (result.startsWith("Amount credited")) {
+                    System.out.println("Auto-debit successful: " + pocketName + " + " + amount);
+                } else {
+                    System.out.println("Auto-debit failed for " + pocketName + ": " + result);
+                }
+
+            } else {
+                System.out.println("Auto-debit skipped (insufficient balance) for " + pocketName);
+            }
+        }
+    }
+    public String runSingleAutoDebit(String pocketName) {
+        for (AutoDebit rule : autoDebits) {
+
+            if (rule.autoDebitPocketName().equalsIgnoreCase(pocketName)) {
+
+                double amount = rule.autoDebitAmount();
+
+                if (balance < amount) {
+                    return "Insufficient balance for auto-debit.";
+                }
+
+                String result = transferToPocket(pocketName, amount);
+                return "Auto-debit result: " + result;
+            }
+        }
+
+        return "Auto-debit rule not found.";
+    }
     }
