@@ -25,4 +25,16 @@ public class AutoDebit {
     public double autoDebitAmount() {
         return amount;
     }
+    private LocalDate calculateNextRun(LocalDate fromDate) {
+        switch (frequency) {
+            case DAILY:
+                return fromDate.plusDays(1);
+            case WEEKLY:
+                return fromDate.plusWeeks(1);
+            case MONTHLY:
+                return fromDate.plusMonths(1);
+            default:
+                return fromDate.plusDays(1);
+        }
+    }
 }
