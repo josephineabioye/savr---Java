@@ -74,20 +74,16 @@ public class Account {
     public void runAutoDebits() {
         for (AutoDebit rule : autoDebits) {
 
-            double amount = rule.autoDebitAmount();
-            String pocketName = rule.autoDebitPocketName();
+            if (rule.isDue()) {
 
-            if (balance >= amount) {
-                String result = transferToPocket(pocketName, amount);
+                String result = transferToPocket(rule.autoDebitPocketName(), rule.autoDebitAmount());
 
-                if (result.startsWith("Amount credited")) {
-                    System.out.println("Auto-debit successful: " + pocketName + " + " + amount);
+                if (result.toLowerCase().contains("credited")) {
+                    rule.markExecuted();
+                    System.out.println("Auto-debit successful for " + rule.autoDebitPocketName());
                 } else {
-                    System.out.println("Auto-debit failed for " + pocketName + ": " + result);
+                    System.out.println("Auto-debit failed for " + rule.autoDebitPocketName() + ": " + result);
                 }
-
-            } else {
-                System.out.println("Auto-debit skipped (insufficient balance) for " + pocketName);
             }
         }
     }
