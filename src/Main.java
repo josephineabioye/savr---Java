@@ -1,9 +1,6 @@
 package savr;
 
-import savr.model.Account;
-import savr.model.AutoDebit;
-import savr.model.Pocket;
-import savr.model.Transaction;
+import savr.model.*;
 
 import java.util.Scanner;
 
@@ -92,7 +89,11 @@ public class Main {
                 double amount = reader.nextDouble();
                 reader.nextLine();
 
-                AutoDebit rule = new AutoDebit(pocketName, amount);
+                System.out.print("Frequency(DAILY / WEEKLY / MONTHLY): ");
+                String input = reader.nextLine().trim();
+                Frequency freq = Frequency.valueOf(input.toUpperCase());
+
+                AutoDebit rule = new AutoDebit(pocketName, amount, freq);
                 account1.addAutoDebit(rule);
 
                 System.out.println("Auto-debit created successfully.");
