@@ -37,4 +37,7 @@ public class AutoDebit {
                 return fromDate.plusDays(1);
         }
     }
+    public boolean isDue() {
+        return !LocalDate.now().isBefore(nextRun);
+    }
 }
