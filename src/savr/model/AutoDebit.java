@@ -40,4 +40,8 @@ public class AutoDebit {
     public boolean isDue() {
         return !LocalDate.now().isBefore(nextRun);
     }
+    public void markExecuted() {
+        lastRun = LocalDate.now();
+        nextRun = calculateNextRun(lastRun);
+    }
 }
