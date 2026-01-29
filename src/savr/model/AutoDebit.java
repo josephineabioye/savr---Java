@@ -17,6 +17,14 @@ public class AutoDebit {
         this.lastRun = null;
         this.nextRun = calculateNextRun(LocalDate.now());
     }
+    public AutoDebit(String pocketName, double amount, Frequency frequency,
+                     LocalDate lastRun, LocalDate nextRun) {
+        this.pocketName = pocketName;
+        this.amount = amount;
+        this.frequency = frequency;
+        this.lastRun = lastRun;
+        this.nextRun = nextRun;
+    }
 
     public String autoDebitPocketName() {
         return pocketName;
@@ -43,5 +51,12 @@ public class AutoDebit {
     public void markExecuted() {
         lastRun = LocalDate.now();
         nextRun = calculateNextRun(lastRun);
+    }
+    public String toFileString() {
+        return pocketName + ", " +
+                amount + ", " +
+                frequency + ", " +
+                lastRun + ", " +
+                nextRun;
     }
 }
